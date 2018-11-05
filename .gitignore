@@ -1,0 +1,12 @@
+# IntelliJ project files
+.idea
+
+# Ansible
+tests/roles
+*.retry
+
+# Vagrant
+.vagrant
+
+# Python
+venv
