@@ -3,12 +3,24 @@
   package_facts:
     manager: "auto"
 
+- name: detect if git is installed
+  shell: which git
+  register: is_git_installed_output
+  failed_when: false
+  changed_when: false
+
+- name: retrieve tmux version
+  shell: tmux -V
+  register: tmux_version_output
+  changed_when: false
+  failed_when: tmux_version_output.rc != 0 and not 'command not found' in tmux_version_output.stderr
+
 - name: assert depdencies installed and correct version
   assert:
     that:
-      - '"git" in ansible_facts.packages'
-      - '"tmux" in ansible_facts.packages'
-      - ansible_facts.packages.tmux[0].version is version('1.9', '>=')
+      - is_git_installed_output.rc == 0
+      - tmux_version_output.rc == 0
+      - tmux_version_output.stdout.split()[1] is version('1.9', '>=')
     msg: "Dependencies not installed or incorrect version"
 
 # http://docs.ansible.com/ansible/git_module.html
