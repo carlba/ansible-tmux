@@ -1,4 +1,5 @@
 ---
-- include: installation.yml
-- include: configuration.yml
 
+- include: installation.yml
+  when: is_privileged_user
+- include: configuration.yml

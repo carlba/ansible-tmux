@@ -5,12 +5,11 @@
   become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
   package:
     name: git
-  when: is_privileged_user
 
 - name: Ensure apt cache is updated on Debian based OSes
   become: true
   apt: update_cache=true cache_valid_time=3600
-  when: is_privileged_user and ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian'
 
 - name: "install tmux (Generic Linux)"
   become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
@@ -29,7 +28,7 @@
     yum:
       name: tmux
       enablerepo: gf-plus
-      state: present
+      state: '{{ installation_state }}'
 
   - name: Ensure Ghettoforge repo is removed
     become: true
@@ -47,4 +46,3 @@
       path: /var/cache/yum
       state: absent
   when: ansible_os_family in ['RedHat']
-
