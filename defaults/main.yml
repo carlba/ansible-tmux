@@ -1,2 +1,3 @@
 ---
 is_privileged_user: true
+installation_state: latest # latest or present

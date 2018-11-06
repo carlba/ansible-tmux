@@ -1,0 +1,50 @@
+---
+
+# http://docs.ansible.com/ansible/git_module.html
+- name: make sure git is installed
+  become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
+  package:
+    name: git
+  when: is_privileged_user
+
+- name: Ensure apt cache is updated on Debian based OSes
+  become: true
+  apt: update_cache=true cache_valid_time=3600
+  when: is_privileged_user and ansible_os_family == 'Debian'
+
+- name: "install tmux (Generic Linux)"
+  become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
+  package: name=tmux state='{{ installation_state }}'
+  when: ansible_os_family not in ['RedHat']
+
+- block:
+  - name: Ensure Ghettoforge repo is installed
+    become: true
+    yum:
+      name: http://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el7.noarch.rpm
+    when: ansible_os_family in ['RedHat']
+
+  - name: Ensure the latest version of tmux is installed (CentOS)
+    become: true
+    yum:
+      name: tmux
+      enablerepo: gf-plus
+      state: present
+
+  - name: Ensure Ghettoforge repo is removed
+    become: true
+    yum:
+      name: gf-release
+      state: absent
+
+  - name: Ensure yum metadate is clean
+    become: true
+    command: yum clean metadata
+
+  - name: Ensure yum cache is clean
+    become: true
+    file:
+      path: /var/cache/yum
+      state: absent
+  when: ansible_os_family in ['RedHat']
+
