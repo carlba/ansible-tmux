@@ -1,3 +1,4 @@
+---
 - name: detect if git is installed
   shell: which git
   register: is_git_installed_output
