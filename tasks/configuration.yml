@@ -3,19 +3,19 @@
   package_facts:
     manager: "auto"
 
-- name: detect if git is installed
+- name: Check if git is installed
   shell: which git
   register: is_git_installed_output
   failed_when: false
   changed_when: false
 
-- name: retrieve tmux version
+- name: Retrieve tmux version
   shell: tmux -V
   register: tmux_version_output
   changed_when: false
   failed_when: tmux_version_output.rc != 0 and not 'command not found' in tmux_version_output.stderr
 
-- name: assert depdencies installed and correct version
+- name: Assert depdencies are installed and of correct version
   assert:
     that:
       - is_git_installed_output.rc == 0
@@ -24,25 +24,25 @@
     msg: "Dependencies not installed or incorrect version"
 
 # http://docs.ansible.com/ansible/git_module.html
-- name: update git repo
+- name: Ensure latest tpm is present from git repo
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
     clone: yes
     update: yes
 
-- name: 'template tmux config to "{{ ansible_env.HOME }}/.tmux.conf"'
+- name: Ensure TMUX config is based on template
   template:
     src: tmux.conf.j2
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     force: true
 
-- name: install tmux plugins
+- name: Ensure TMUX plugins are installed
   shell: "{{ ansible_env.HOME }}/.tmux/plugins/tpm/bin/install_plugins"
   register: result
   changed_when: '"download success" in result.stdout'
 
-- name: Ensure 256 colors is used in tmux (absent)
+- name: Ensure 256 colors is used in TMUX (absent)
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.bashrc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK (make sure 256 colors is used in tmux)"
