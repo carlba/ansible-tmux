@@ -81,5 +81,6 @@ set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 #Configure statusbar
 set -g status-right ' #{prefix_highlight} | CPU: #{cpu_icon} #{cpu_percentage} | Online: #{online_status} | Batt: #{battery_icon} #{battery_percentage} #{battery_remain}| %a %Y-%m-%d %H:%M '
 set -g status-right-length 400
+set -g status-left-length 50
 
 run '~/.tmux/plugins/tpm/tpm'
