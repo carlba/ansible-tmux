@@ -1,8 +1,4 @@
-
-- name: retrieve installed packages
-  package_facts:
-    manager: "auto"
-
+---
 - name: Check if git is installed
   shell: which git
   register: is_git_installed_output

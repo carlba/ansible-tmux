@@ -1,5 +1,4 @@
 ---
-
 # http://docs.ansible.com/ansible/git_module.html
 - name: make sure git is installed
   become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
