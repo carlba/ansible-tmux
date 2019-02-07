@@ -27,18 +27,18 @@
     clone: yes
     update: yes
 
-- name: Ensure TMUX config is based on template
+- name: Ensure tmux config is based on template
   template:
     src: tmux.conf.j2
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     force: true
 
-- name: Ensure TMUX plugins are installed
+- name: Ensure tmux plugins are installed
   shell: "{{ ansible_env.HOME }}/.tmux/plugins/tpm/bin/install_plugins"
   register: result
   changed_when: '"download success" in result.stdout'
 
-- name: Ensure 256 colors is used in TMUX (absent)
+- name: Ensure 256 colors is used in tmux (absent)
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.bashrc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK (make sure 256 colors is used in tmux)"
