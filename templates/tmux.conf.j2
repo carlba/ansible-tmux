@@ -2,8 +2,8 @@
 set -g default-terminal "screen-256color"
 
 
-# Set the refresh rate of the statusbar to 3000
-set -g display-time 3000
+# Set the refresh rate of the statusbar to 10000
+set -g display-time 10000
 
 # Mouse
 set -g mouse on
@@ -79,7 +79,7 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
 #Configure statusbar
-set -g status-right ' #{prefix_highlight} | CPU: #{cpu_icon} #{cpu_percentage} | Online: #{online_status} | Batt: #{battery_icon} #{battery_percentage} #{battery_remain}| %a %Y-%m-%d %H:%M '
+set -g status-right ' #{prefix_highlight} %a %Y-%m-%d %H:%M '
 set -g status-right-length 400
 set -g status-left-length 50
 
