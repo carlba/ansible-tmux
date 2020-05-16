@@ -1,7 +1,7 @@
 tmux
 ====
 
-Deploys vim and my customized tmux config 
+Deploys my tmux config
 
 Setup the environment
 ---------------------
@@ -17,17 +17,29 @@ Setup the environment
 3. Install the ansible environment
     
    ```bash
-   virtualenv -p python2 venv; source venv/bin/activate
+   virtualenv -p python3 venv; source venv/bin/activate
    pip install -r requirements.txt
+   pip install .
    ansible-galaxy install -r requirements.yml --roles-path=tests/roles
    ```
+   
+Running 
+-------
+
+This role can be tested, like so:
+
+```bash
+role-update
+role-test
+```
+
 
 Import the role from GitHub to Ansible Galaxy
 ---------------------------------------------
 
 3. Import the role
    ```bash
-   ansible-galaxy import --role-name=tmux carlba ansible-tmux
+   ansible-galaxy import --role-name=dotfiles-minimal carlba ansible-tmux
    ```
 
 Example Playbook
@@ -43,4 +55,3 @@ License
 -------
 
 MIT
-

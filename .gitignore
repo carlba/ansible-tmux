@@ -10,3 +10,7 @@ tests/roles
 
 # Python
 venv
+*.egg
+.gtm/
+build/
+*.egg-info/
