@@ -1,7 +1,6 @@
 # Default to 256 color terminal
 set -g default-terminal "screen-256color"
 
-
 # Set the refresh rate of the statusbar to 10000
 set -g display-time 10000
 
@@ -26,14 +25,13 @@ set -g default-command "/bin/bash -l"
 set-environment -g TMUX_PLUGIN_MANAGER_PATH "{{ ansible_env.HOME }}/.tmux/plugins"
 {% endif %}
 
-# Enable Tmux plugin manager
+# Enable Tmucx plugin manager
 # https://github.com/tmux-plugins/tpm
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # https://github.com/tmux-plugins/tmux-resurrect
-# Temporarily changed to https://github.com/kevinkjt2000/tmux-resurrect to fix first window bug
-set -g @plugin 'kevinkjt2000/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 # https://github.com/tmux-plugins/tmux-continuum
 set -g @plugin 'tmux-plugins/tmux-continuum'
 
