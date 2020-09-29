@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-if [[ "$1" ]]; then
+if [[ ! -z "$TMUXIFY_SESSION_NAME"  ]]; then
+    tmux new -s "$TMUXIFY_SESSION_NAME" || tmux at -t "$TMUXIFY_SESSION_NAME"
+elif [[ "$1" ]]; then
     tmux new -s $1 || tmux at -t $1
 else
     tmux new -s cada || tmux at -t cada
