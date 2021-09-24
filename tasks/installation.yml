@@ -20,7 +20,7 @@
     name: tmux
     state: latest
     path: /opt/homebrew/bin
-  when: ansible_os_family in ['RedHat']
+  when: ansible_os_family in ['Darwin']
 
 - block:
   - name: Ensure Ghettoforge repo is installed
