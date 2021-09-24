@@ -13,7 +13,14 @@
 - name: "install tmux (Generic Linux)"
   become: "{{ (ansible_os_family in ['Darwin']) | ternary('false', 'true') }}"
   package: name=tmux state='{{ installation_state }}'
-  when: ansible_os_family not in ['RedHat']
+  when: ansible_os_family not in ['RedHat','Darwin']
+
+- name: "install tmux (MacOS)"
+  homebrew: 
+    name: tmux
+    state: latest
+    path: /opt/homebrew/bin
+  when: ansible_os_family in ['RedHat']
 
 - block:
   - name: Ensure Ghettoforge repo is installed

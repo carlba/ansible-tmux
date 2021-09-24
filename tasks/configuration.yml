@@ -11,7 +11,7 @@
   changed_when: false
   failed_when: tmux_version_output.rc != 0 and not 'command not found' in tmux_version_output.stderr
 
-- name: Assert depdencies are installed and of correct version
+- name: Assert dependencies are installed and of correct version
   assert:
     that:
       - is_git_installed_output.rc == 0
