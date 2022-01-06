@@ -17,31 +17,31 @@
       - is_git_installed_output.rc == 0
       - tmux_version_output.rc == 0
       - tmux_version_output.stdout.split()[1] is version('1.9', '>=')
-    msg: "Dependencies not installed or incorrect version"
+    msg: 'Dependencies not installed or incorrect version'
 
 # http://docs.ansible.com/ansible/git_module.html
 - name: Ensure latest tpm is present from git repo
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+    dest: '{{ ansible_env.HOME }}/.tmux/plugins/tpm'
     clone: yes
     update: yes
 
 - name: Ensure tmux config is based on template
   template:
     src: tmux.conf.j2
-    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    dest: '{{ ansible_env.HOME }}/.tmux.conf'
     force: true
 
 - name: Ensure tmux plugins are installed
-  shell: "{{ ansible_env.HOME }}/.tmux/plugins/tpm/bin/install_plugins"
+  shell: '{{ ansible_env.HOME }}/.tmux/plugins/tpm/bin/install_plugins'
   register: result
   changed_when: '"download success" in result.stdout'
 
 - name: Ensure 256 colors is used in tmux (absent)
   blockinfile:
-    dest: "{{ ansible_env.HOME }}/.bashrc"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK (make sure 256 colors is used in tmux)"
+    dest: '{{ ansible_env.HOME }}/.bashrc'
+    marker: '# {mark} ANSIBLE MANAGED BLOCK (make sure 256 colors is used in tmux)'
     content: export TERM=xterm-256color
     state: absent
   when: ansible_os_family not in ['Darwin']
