@@ -4,5 +4,5 @@ if [[ ! -z "$TMUXIFY_SESSION_NAME"  ]]; then
 elif [[ "$1" ]]; then
     tmux new -s $1 || tmux at -t $1
 else
-    tmux new -s cada || tmux at -t cada
+    tmuxp load -y cada
 fi

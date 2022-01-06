@@ -28,18 +28,6 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # https://github.com/NHDaly/tmux-better-mouse-mode
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
-# https://github.com/tmux-plugins/tmux-resurrect
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-# https://github.com/tmux-plugins/tmux-continuum
-set -g @plugin 'tmux-plugins/tmux-continuum'
-
-# https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_programs.md
-set -g @resurrect-processes 'ssh mysql "~fb-messenger-cli" tail'
-set -g @resurrect-strategy-nvim 'session'
-set -g @continuum-boot 'on'
-set -g @continuum-save-interval '1'
-set -g @continuum-restore 'on'
-
 set -g status-right ''
 set -g status-left-length 50
 
