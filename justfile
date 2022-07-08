@@ -31,5 +31,5 @@ format:
   @prettier --write .
 
 test-role:
-  /bin/bash
+  #!/usr/bin/env bash
   cd tests && ansible-playbook --connection local -i localhost, test.yml

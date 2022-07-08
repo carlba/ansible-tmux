@@ -25,8 +25,8 @@ Deploys my tmux config
 This role can be tested, like so:
 
 ```bash
-role-update
-role-test
+just update
+just test
 ```
 
 ## Import the role from GitHub to Ansible Galaxy
