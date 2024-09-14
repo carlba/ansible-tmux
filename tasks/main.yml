@@ -1,4 +1,4 @@
 ---
-- include: installation.yml
+- import_tasks: installation.yml
   when: is_privileged_user
-- include: configuration.yml
+- import_tasks: configuration.yml
